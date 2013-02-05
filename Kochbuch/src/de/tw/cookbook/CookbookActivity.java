@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import de.tw.cookbook.entity.Cookbook;
@@ -27,6 +28,14 @@ public class CookbookActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cookbook);
 
+//		Button b = (Button) findViewById(R.id.bt_save_kochbuch);
+//		b.
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
 		Log.i(CookbookActivity.class.getName(), "Datenbank geöffnet");
 		cookbookDataSource = new CookbookDataSource(this);
 		cookbookDataSource.open();
@@ -39,17 +48,11 @@ public class CookbookActivity extends ListActivity {
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-
-	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		getMenuInflater().inflate(R.menu.context_menu_delete, menu);
 		menu.setHeaderTitle("Select an Option");
-		menu.setHeaderIcon(android.R.drawable.ic_delete);
 	}
 
 	@Override
