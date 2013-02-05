@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.tw.cookbook.entity.Cookbook;
+import de.tw.cookbook.persistence.tables.CookbookTable;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -15,8 +16,8 @@ public class CookbookDataSource {
 
 	private SQLiteDatabase database;
 	private MySQLiteHelper dbHelper;
-	private String[] allColumns = {MySQLiteHelper.COLUMN_COOKBOOK_ID,
-			MySQLiteHelper.COLUMN_COOKBOOK_NAME };
+	private String[] allColumns = {CookbookTable.COLUMN_COOKBOOK_ID,
+			CookbookTable.COLUMN_COOKBOOK_NAME };
 	
 
 	public CookbookDataSource(Context context) {
@@ -34,12 +35,12 @@ public class CookbookDataSource {
 	public Cookbook createCookbook(String cookbookName) {
 		Log.i(CookbookDataSource.class.getName(), "cookbookName: " + cookbookName);
 		ContentValues values = new ContentValues();
-		values.put(MySQLiteHelper.COLUMN_COOKBOOK_NAME, cookbookName);
+		values.put(CookbookTable.COLUMN_COOKBOOK_NAME, cookbookName);
 		Log.i(CookbookDataSource.class.getName(), "works bis hier");
-		long insertId = database.insert(MySQLiteHelper.TABLE_COOKBOOK, null, values);
+		long insertId = database.insert(CookbookTable.TABLE_COOKBOOK, null, values);
 		Log.i(CookbookDataSource.class.getName(), "works bis hier2");
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_COOKBOOK, 
-				allColumns, MySQLiteHelper.COLUMN_COOKBOOK_ID + " = " + insertId, 
+		Cursor cursor = database.query(CookbookTable.TABLE_COOKBOOK, 
+				allColumns, CookbookTable.COLUMN_COOKBOOK_ID + " = " + insertId, 
 				null, null, null, null);
 		Log.i(CookbookDataSource.class.getName(), "works bis hier3");
 		cursor.moveToFirst();
@@ -52,7 +53,7 @@ public class CookbookDataSource {
 	public void deleteCookbook(Cookbook cookbook) {
 		long id = cookbook.getId();
 		Log.i(CookbookDataSource.class.getName(), "Cookbook deleted with id: " + id);
-		database.delete(MySQLiteHelper.TABLE_COOKBOOK, MySQLiteHelper.COLUMN_COOKBOOK_ID
+		database.delete(CookbookTable.TABLE_COOKBOOK, CookbookTable.COLUMN_COOKBOOK_ID
 				+ " = " + id, null);
 	}
 	
@@ -60,7 +61,7 @@ public class CookbookDataSource {
 		Log.i(CookbookDataSource.class.getName(), "getAllCookbooks() start");
 		List<Cookbook> cookbooks = new ArrayList<Cookbook>();
 		
-		Cursor cursor = database.query(MySQLiteHelper.TABLE_COOKBOOK, 
+		Cursor cursor = database.query(CookbookTable.TABLE_COOKBOOK, 
 				allColumns, null, null, null, null, null);
 		// TODO letzer Parameter kann auch "name" sein, damit die cookbooks geordnet zurueck gegeben werden
 		cursor.moveToFirst();

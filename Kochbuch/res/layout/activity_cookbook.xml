@@ -7,6 +7,7 @@
 
     <TextView
         style="@style/Headline"
+        android:id="@+id/tv_headline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/kochbuecher" />
@@ -20,10 +21,10 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/bt_save_kochbuch"
+            android:id="@+id/bt_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/save" 
+            android:text="@string/add" 
             android:layout_weight="3"
             android:onClick="onClick"/>
 

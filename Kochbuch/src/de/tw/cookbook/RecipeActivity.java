@@ -1,26 +1,84 @@
 package de.tw.cookbook;
 
+import java.util.List;
+
+import de.tw.cookbook.entity.Cookbook;
+import de.tw.cookbook.entity.Recipe;
+import de.tw.cookbook.persistence.CookbookDataSource;
+import de.tw.cookbook.persistence.RecipeDataSource;
 import de.tw.kochbuch.R;
+import android.R.anim;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class RecipeActivity extends ListActivity {
+
+	private RecipeDataSource recipeDataSource;
+	private CookbookDataSource cookbookDataSource;
+	private Cookbook selectedCookbook = new Cookbook();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_recipe);
-		
-		setHeadline();
+		setContentView(R.layout.activity_cookbook);
+		Bundle cookbook = getIntent().getExtras();
+		long cookbookId = cookbook.getLong("cookbookId");
+		String cookbookName = cookbook.getString("cookbookName");
+		selectedCookbook.setId(cookbookId);
+		selectedCookbook.setName(cookbookName);
+
+		Log.i(RecipeActivity.class.getName(), "CookbookName: "
+				+ selectedCookbook.getName());
+		Log.i(RecipeActivity.class.getName(),
+				"CookbookId: " + selectedCookbook.getId());
+
+		 setHeadline();
 	}
 
-	private void setHeadline() {
-		// TODO Auto-generated method stub
-		
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		recipeDataSource = new RecipeDataSource(this);
+		recipeDataSource.open();
+		/*
+		  List<Recipe> values = recipeDataSource.getAllRecipes(selectedCookbook.getId());
+		  ArrayAdapter<Recipe> adapter = new ArrayAdapter<Recipe>(this,
+		  android.R.layout.simple_list_item_1, values);
+		  setListAdapter(adapter); 
+		  registerForContextMenu(getListView());
+		 */
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		recipeDataSource.close();
 	}
 	
-	public void onClick(View view) {
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+		Recipe recipe = (Recipe)l.getItemAtPosition(position);
 		
+		Intent intent = new Intent(this, RecipeDetailActivity.class);
+		intent.putExtra("recipeId", recipe.getId());
+		intent.putExtra("recipeName", recipe.getName());
+		startActivity(intent);
+	}
+	
+	private void setHeadline() {
+		TextView healdine = (TextView) findViewById(R.id.tv_headline);
+		healdine.setText(selectedCookbook.getName() + " recipes");
+	}
+
+	public void onClick(View view) {
+
 	}
 }

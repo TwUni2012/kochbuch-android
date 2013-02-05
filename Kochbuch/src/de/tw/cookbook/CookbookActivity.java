@@ -87,9 +87,9 @@ public class CookbookActivity extends ListActivity {
 		Log.i(CookbookActivity.class.getName(), "c.getName: " + cookbook.getName());
 		
 		Intent intent = new Intent(this, RecipeActivity.class);
-		intent.putExtra("Cookbook", cookbook);
+		intent.putExtra("cookbookId", cookbook.getId());
+		intent.putExtra("cookbookName", cookbook.getName());
 		startActivity(intent);
-		
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class CookbookActivity extends ListActivity {
 		Cookbook newCookbook = null;
 
 		switch (view.getId()) {
-		case R.id.bt_save_kochbuch:
+		case R.id.bt_save:
 			EditText cookbookNameEditText = (EditText) findViewById(R.id.edt_kochbuchname);
 			String cookbookName = cookbookNameEditText.getText().toString();
 			Log.i(CookbookActivity.class.getName(), cookbookName);
