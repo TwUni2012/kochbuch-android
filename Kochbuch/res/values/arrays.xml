@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cookbooks">
+        <item>Deutsch</item>
+        <item>Italienisch</item>
+        <item>Französisch</item>
+        <item>Japanisch</item>
+    </string-array>
+</resources>
