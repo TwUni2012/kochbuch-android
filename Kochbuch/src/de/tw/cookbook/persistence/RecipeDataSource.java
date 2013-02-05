@@ -17,8 +17,12 @@ public class RecipeDataSource {
 
 	private SQLiteDatabase database;
 	private MySQLiteHelper dbHelper;
-	private String[] allColumns = { RecipeTable.COLUMN_RECIPE_ID,
-			RecipeTable.COLUMN_RECIPE_NAME};
+	private String[] allColumns = { 
+			RecipeTable.COLUMN_RECIPE_ID,
+			RecipeTable.COLUMN_RECIPE_NAME,
+			RecipeTable.COLUMN_RECIPE_DESCRIPTION,
+			RecipeTable.COLUMN_RECIPE_PREPARATIONSTEPS,
+			RecipeTable.COLUMN_RECIPE_COOKBOOK_ID};
 
 	public RecipeDataSource(Context context) {
 		dbHelper = new MySQLiteHelper(context);
@@ -83,17 +87,23 @@ public class RecipeDataSource {
 		recipe.setId(cursor.getLong(0));
 		Log.i(CookbookDataSource.class.getName(), "cursor.getString(1): " + cursor.getString(1));
 		recipe.setName(cursor.getString(1));
+		Log.i(CookbookDataSource.class.getName(), "cursor.getString(2): " + cursor.getString(2));
+		recipe.setDescription(cursor.getString(2));
+		Log.i(CookbookDataSource.class.getName(), "cursor.getString(3): " + cursor.getString(3));
+		recipe.setPreparationStep(cursor.getString(3));
+		
 		return recipe;
 	}
 	
 	public void updateRecipe(Recipe recipe) {
-//		database.delete(RecipeTable.TABLE_RECIPE, RecipeTable.COLUMN_RECIPE_ID
-//				+ " = " + id, null);
-		/*
-		database.update(table, 
+		ContentValues values = new ContentValues();
+		values.put(RecipeTable.COLUMN_RECIPE_NAME, recipe.getName());
+		values.put(RecipeTable.COLUMN_RECIPE_DESCRIPTION, recipe.getDescription());
+		values.put(RecipeTable.COLUMN_RECIPE_PREPARATIONSTEPS, recipe.getPreparationStep());
+		long recipeId = recipe.getId();
+		database.update(RecipeTable.TABLE_RECIPE, 
 				values, 
-				whereClause, 
-				whereArgs);
-		 */
+				RecipeTable.COLUMN_RECIPE_ID + " = " + recipeId, 
+				null);
 	}
 }

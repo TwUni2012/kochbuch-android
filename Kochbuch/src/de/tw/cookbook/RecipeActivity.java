@@ -61,7 +61,7 @@ public class RecipeActivity extends ListActivity {
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		getMenuInflater().inflate(R.menu.context_menu_delete, menu);
-		menu.setHeaderTitle("Select an Option");
+		menu.setHeaderTitle(getResources().getString(R.string.selectAnOption));
 	}
 
 	@Override
@@ -101,13 +101,13 @@ public class RecipeActivity extends ListActivity {
 		Recipe recipe = (Recipe) l.getItemAtPosition(position);
 
 		Intent intent = new Intent(this, RecipeDetailActivity.class);
-		intent.putExtra("recipeId", recipe);
+		intent.putExtra("recipe", recipe);
 		startActivity(intent);
 	}
 
 	private void setHeadline() {
 		TextView healdine = (TextView) findViewById(R.id.tv_headline);
-		healdine.setText(selectedCookbook.getName() + " recipes");
+		healdine.setText(selectedCookbook.getName() + " " + getResources().getString(R.string.recipes));
 	}
 
 	public void onClick(View view) {

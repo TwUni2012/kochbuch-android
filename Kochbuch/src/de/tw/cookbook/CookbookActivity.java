@@ -49,7 +49,7 @@ public class CookbookActivity extends ListActivity {
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		getMenuInflater().inflate(R.menu.context_menu_delete, menu);
-		menu.setHeaderTitle("Select an Option");
+		menu.setHeaderTitle(getResources().getString(R.string.selectAnOption));
 	}
 
 	@Override
