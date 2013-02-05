@@ -1,14 +1,16 @@
 package de.tw.cookbook.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Recipe {
-
+public class Recipe implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private long id;
 	private String name;
 	private long cookbookId;
 	private String description;
-	private ArrayList<PreparationStep> preparationStep;
+	private ArrayList<String> preparationSteps;
 	
 	public Recipe() {
 	}
@@ -37,10 +39,15 @@ public class Recipe {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public ArrayList<PreparationStep> getPreparationStep() {
-		return preparationStep;
+	public ArrayList<String> getPreparationStep() {
+		return preparationSteps;
 	}
-	public void setPreparationStep(ArrayList<PreparationStep> preparationStep) {
-		this.preparationStep = preparationStep;
+	public void setPreparationStep(ArrayList<String> preparationStep) {
+		this.preparationSteps = preparationStep;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 }

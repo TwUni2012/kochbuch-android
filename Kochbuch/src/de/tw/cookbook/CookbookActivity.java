@@ -22,20 +22,17 @@ import de.tw.kochbuch.R;
 public class CookbookActivity extends ListActivity {
 
 	private CookbookDataSource cookbookDataSource;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cookbook);
-
-//		Button b = (Button) findViewById(R.id.bt_save_kochbuch);
-//		b.
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+
 		Log.i(CookbookActivity.class.getName(), "Datenbank geöffnet");
 		cookbookDataSource = new CookbookDataSource(this);
 		cookbookDataSource.open();
@@ -57,18 +54,20 @@ public class CookbookActivity extends ListActivity {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item
+				.getMenuInfo();
 		switch (item.getItemId()) {
 		case R.id.menu_delete:
 			int position = info.position;
-			Log.i(CookbookActivity.class.getName(), "position: " + item.getItemId());
+			Log.i(CookbookActivity.class.getName(),
+					"position: " + item.getItemId());
 			ListView l = getListView();
-			
-			Cookbook cookbook = (Cookbook)l.getItemAtPosition(position);
+
+			Cookbook cookbook = (Cookbook) l.getItemAtPosition(position);
 			cookbookDataSource.deleteCookbook(cookbook);
 			ArrayAdapter<Cookbook> adapter = (ArrayAdapter<Cookbook>) getListAdapter();
 			adapter.remove(cookbook);
-			// adapter.notifyDataSetChanged();
+			adapter.notifyDataSetChanged();
 			break;
 		case R.id.menu_cancel:
 			break;
@@ -82,10 +81,12 @@ public class CookbookActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Log.i(CookbookActivity.class.getName(), "id: " + id);
-		Cookbook cookbook = (Cookbook)l.getItemAtPosition(position);
-		Log.i(CookbookActivity.class.getName(), "c.getId(): " + cookbook.getId());
-		Log.i(CookbookActivity.class.getName(), "c.getName: " + cookbook.getName());
-		
+		Cookbook cookbook = (Cookbook) l.getItemAtPosition(position);
+		Log.i(CookbookActivity.class.getName(),
+				"c.getId(): " + cookbook.getId());
+		Log.i(CookbookActivity.class.getName(),
+				"c.getName: " + cookbook.getName());
+
 		Intent intent = new Intent(this, RecipeActivity.class);
 		intent.putExtra("cookbook", cookbook);
 		startActivity(intent);
@@ -104,16 +105,14 @@ public class CookbookActivity extends ListActivity {
 
 		switch (view.getId()) {
 		case R.id.bt_save:
-			EditText cookbookNameEditText = (EditText) findViewById(R.id.edt_kochbuchname);
+			EditText cookbookNameEditText = (EditText) findViewById(R.id.edt_name);
 			String cookbookName = cookbookNameEditText.getText().toString();
 			Log.i(CookbookActivity.class.getName(), cookbookName);
 			if (!"".equals(cookbookName)) {
-				
 				newCookbook = cookbookDataSource.createCookbook(cookbookName);
 				adapter.add(newCookbook);
 			}
 			cookbookNameEditText.setText("");
-			
 			break;
 		default:
 			break;

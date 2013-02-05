@@ -33,18 +33,15 @@ public class CookbookDataSource {
 	}
 
 	public Cookbook createCookbook(String cookbookName) {
-		Log.i(CookbookDataSource.class.getName(), "cookbookName: " + cookbookName);
+		Log.i(CookbookDataSource.class.getName(), "createCookbook: " + cookbookName);
 		ContentValues values = new ContentValues();
 		values.put(CookbookTable.COLUMN_COOKBOOK_NAME, cookbookName);
-		Log.i(CookbookDataSource.class.getName(), "works bis hier");
 		long insertId = database.insert(CookbookTable.TABLE_COOKBOOK, null, values);
 		Log.i(CookbookDataSource.class.getName(), "works bis hier2");
 		Cursor cursor = database.query(CookbookTable.TABLE_COOKBOOK, 
 				allColumns, CookbookTable.COLUMN_COOKBOOK_ID + " = " + insertId, 
 				null, null, null, null);
-		Log.i(CookbookDataSource.class.getName(), "works bis hier3");
 		cursor.moveToFirst();
-		Log.i(CookbookDataSource.class.getName(), "works bis hie4");
 		Cookbook newCookbook = cursorToCookbook(cursor);
 		cursor.close();
 		return newCookbook;
@@ -62,8 +59,7 @@ public class CookbookDataSource {
 		List<Cookbook> cookbooks = new ArrayList<Cookbook>();
 		
 		Cursor cursor = database.query(CookbookTable.TABLE_COOKBOOK, 
-				allColumns, null, null, null, null, null);
-		// TODO letzer Parameter kann auch "name" sein, damit die cookbooks geordnet zurueck gegeben werden
+				allColumns, null, null, null, null, CookbookTable.COLUMN_COOKBOOK_NAME);
 		cursor.moveToFirst();
 		while(!cursor.isAfterLast()) {
 			Cookbook cookbook = cursorToCookbook(cursor);
