@@ -1,6 +1,9 @@
 package de.tw.kochbuch.entity;
 
-public class Cookbook {
+import java.io.Serializable;
+
+public class Cookbook implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String name;
 	

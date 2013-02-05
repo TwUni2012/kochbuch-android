@@ -22,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="de.tw.kochbuch.RecipeActivity"/>
+        <activity android:name="de.tw.kochbuch.RecipeDetailActivity"></activity>
     </application>
 
 </manifest>
