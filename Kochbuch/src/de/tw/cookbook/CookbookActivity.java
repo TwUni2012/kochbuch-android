@@ -87,8 +87,7 @@ public class CookbookActivity extends ListActivity {
 		Log.i(CookbookActivity.class.getName(), "c.getName: " + cookbook.getName());
 		
 		Intent intent = new Intent(this, RecipeActivity.class);
-		intent.putExtra("cookbookId", cookbook.getId());
-		intent.putExtra("cookbookName", cookbook.getName());
+		intent.putExtra("cookbook", cookbook);
 		startActivity(intent);
 	}
 

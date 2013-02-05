@@ -1,37 +1,28 @@
 package de.tw.cookbook;
 
-import java.util.List;
-
 import de.tw.cookbook.entity.Cookbook;
 import de.tw.cookbook.entity.Recipe;
-import de.tw.cookbook.persistence.CookbookDataSource;
 import de.tw.cookbook.persistence.RecipeDataSource;
 import de.tw.kochbuch.R;
-import android.R.anim;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 public class RecipeActivity extends ListActivity {
 
 	private RecipeDataSource recipeDataSource;
-	private CookbookDataSource cookbookDataSource;
-	private Cookbook selectedCookbook = new Cookbook();
+	private Cookbook selectedCookbook;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_cookbook);
-		Bundle cookbook = getIntent().getExtras();
-		long cookbookId = cookbook.getLong("cookbookId");
-		String cookbookName = cookbook.getString("cookbookName");
-		selectedCookbook.setId(cookbookId);
-		selectedCookbook.setName(cookbookName);
+		Bundle bundle = getIntent().getExtras();
+		selectedCookbook = (Cookbook) bundle.get("cookbook");
 
 		Log.i(RecipeActivity.class.getName(), "CookbookName: "
 				+ selectedCookbook.getName());
