@@ -1,4 +1,4 @@
-package de.tw.kochbuch.entity;
+package de.tw.cookbook.entity;
 
 import java.io.Serializable;
 

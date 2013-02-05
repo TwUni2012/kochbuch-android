@@ -1,4 +1,4 @@
-package de.tw.kochbuch.persistence;
+package de.tw.cookbook.persistence;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

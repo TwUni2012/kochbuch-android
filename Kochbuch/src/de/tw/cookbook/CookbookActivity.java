@@ -1,4 +1,4 @@
-package de.tw.kochbuch;
+package de.tw.cookbook;
 
 import java.util.List;
 
@@ -14,8 +14,9 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import de.tw.kochbuch.entity.Cookbook;
-import de.tw.kochbuch.persistence.CookbookDataSource;
+import de.tw.cookbook.entity.Cookbook;
+import de.tw.cookbook.persistence.CookbookDataSource;
+import de.tw.kochbuch.R;
 
 public class CookbookActivity extends ListActivity {
 

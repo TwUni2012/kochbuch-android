@@ -1,9 +1,9 @@
-package de.tw.kochbuch.persistence;
+package de.tw.cookbook.persistence;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.tw.kochbuch.entity.Cookbook;
+import de.tw.cookbook.entity.Cookbook;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

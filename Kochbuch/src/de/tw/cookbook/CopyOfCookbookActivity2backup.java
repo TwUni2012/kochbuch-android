@@ -1,4 +1,4 @@
-package de.tw.kochbuch;
+package de.tw.cookbook;
 
 import java.util.List;
 
@@ -9,8 +9,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
-import de.tw.kochbuch.entity.Cookbook;
-import de.tw.kochbuch.persistence.CookbookDataSource;
+import de.tw.cookbook.entity.Cookbook;
+import de.tw.cookbook.persistence.CookbookDataSource;
+import de.tw.kochbuch.R;
 
 public class CopyOfCookbookActivity2backup extends ListActivity {
 

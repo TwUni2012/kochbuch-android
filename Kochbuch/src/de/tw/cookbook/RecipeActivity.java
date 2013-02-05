@@ -1,5 +1,6 @@
-package de.tw.kochbuch;
+package de.tw.cookbook;
 
+import de.tw.kochbuch.R;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
