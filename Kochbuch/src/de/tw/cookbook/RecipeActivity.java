@@ -53,7 +53,6 @@ public class RecipeActivity extends ListActivity {
 				android.R.layout.simple_list_item_1, values);
 		setListAdapter(adapter);
 		registerForContextMenu(getListView());
-
 	}
 
 	@Override

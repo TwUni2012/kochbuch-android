@@ -10,7 +10,7 @@ public class Recipe implements Serializable {
 	private String name;
 	private long cookbookId;
 	private String description;
-	private String preparationSteps;
+//	private String preparationSteps;
 	
 	public Recipe() {
 	}
@@ -47,26 +47,26 @@ public class Recipe implements Serializable {
 		this.description = description;
 	}
 	
-	public ArrayList<String> getPreparationStepAsArrayList() {
-		String[] splitPreparationSteps = preparationSteps.split("::");
-		ArrayList<String> result = new ArrayList<String>();
-		for(String step : splitPreparationSteps) {
-			result.add(step);
-		}
-		return result;
-	}
-	
-	public String getPreparationStep() {
-		return preparationSteps;
-	}
-	
-	public void addPreparationStep(String step) {
-		preparationSteps = preparationSteps + "::" + step;
-	}
-	
-	public void setPreparationStep(String preparationStep) {
-		this.preparationSteps = preparationStep;
-	}
+//	public ArrayList<String> getPreparationStepAsArrayList() {
+//		String[] splitPreparationSteps = preparationSteps.split("::");
+//		ArrayList<String> result = new ArrayList<String>();
+//		for(String step : splitPreparationSteps) {
+//			result.add(step);
+//		}
+//		return result;
+//	}
+//	
+//	public String getPreparationStep() {
+//		return preparationSteps;
+//	}
+//	
+//	public void addPreparationStep(String step) {
+//		preparationSteps = preparationSteps + "::" + step;
+//	}
+//	
+//	public void setPreparationStep(String preparationStep) {
+//		this.preparationSteps = preparationStep;
+//	}
 	
 	@Override
 	public String toString() {

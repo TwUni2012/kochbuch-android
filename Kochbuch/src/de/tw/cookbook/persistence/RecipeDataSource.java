@@ -21,7 +21,7 @@ public class RecipeDataSource {
 			RecipeTable.COLUMN_RECIPE_ID,
 			RecipeTable.COLUMN_RECIPE_NAME,
 			RecipeTable.COLUMN_RECIPE_DESCRIPTION,
-			RecipeTable.COLUMN_RECIPE_PREPARATIONSTEPS,
+//			RecipeTable.COLUMN_RECIPE_PREPARATIONSTEPS,
 			RecipeTable.COLUMN_RECIPE_COOKBOOK_ID};
 
 	public RecipeDataSource(Context context) {
@@ -89,8 +89,8 @@ public class RecipeDataSource {
 		recipe.setName(cursor.getString(1));
 		Log.i(CookbookDataSource.class.getName(), "cursor.getString(2): " + cursor.getString(2));
 		recipe.setDescription(cursor.getString(2));
-		Log.i(CookbookDataSource.class.getName(), "cursor.getString(3): " + cursor.getString(3));
-		recipe.setPreparationStep(cursor.getString(3));
+//		Log.i(CookbookDataSource.class.getName(), "cursor.getString(3): " + cursor.getString(3));
+//		recipe.setPreparationStep(cursor.getString(3));
 		
 		return recipe;
 	}
@@ -99,7 +99,7 @@ public class RecipeDataSource {
 		ContentValues values = new ContentValues();
 		values.put(RecipeTable.COLUMN_RECIPE_NAME, recipe.getName());
 		values.put(RecipeTable.COLUMN_RECIPE_DESCRIPTION, recipe.getDescription());
-		values.put(RecipeTable.COLUMN_RECIPE_PREPARATIONSTEPS, recipe.getPreparationStep());
+//		values.put(RecipeTable.COLUMN_RECIPE_PREPARATIONSTEPS, recipe.getPreparationStep());
 		long recipeId = recipe.getId();
 		database.update(RecipeTable.TABLE_RECIPE, 
 				values, 
