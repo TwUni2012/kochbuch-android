@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="de.tw.kochbuch.CookbookActivity"
+            android:name="de.tw.cookbook.CookbookActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="de.tw.kochbuch.RecipeActivity"/>
-        <activity android:name="de.tw.kochbuch.RecipeDetailActivity"></activity>
+        <activity android:name="de.tw.cookbook.RecipeActivity"/>
+        <activity android:name="de.tw.cookbook.RecipeDetailActivity"></activity>
     </application>
 
 </manifest>
