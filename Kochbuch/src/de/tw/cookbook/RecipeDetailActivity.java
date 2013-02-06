@@ -51,7 +51,7 @@ public class RecipeDetailActivity extends ListActivity {
 	private void setDescriptionText() {
 		String description = recipe.getDescription();
 		Log.i(RecipeDetailActivity.class.getName(), "description: " + description);
-		if ((!"".equals(description)) || !(description == null)) {
+		if ((!"".equals(description)) && !(description == null)) {
 			EditText descriptionEditText = (EditText) findViewById(R.id.edt_description);
 			Button saveDescriptionButton = (Button) findViewById(R.id.bt_save_description);
 			descriptionEditText.setVisibility(View.GONE);
