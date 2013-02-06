@@ -10,6 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import de.tw.cookbook.entity.PreparationStep;
+import de.tw.cookbook.entity.Recipe;
 import de.tw.cookbook.persistence.tables.PreparationStepTable;
 
 public class PreparationStepDataSource {
@@ -50,33 +51,38 @@ public class PreparationStepDataSource {
 		return newPreparationStep;
 	}
 
-	public void deleteCookbook(PreparationStep preparationStep) {
+	public void deletePreparationStep(PreparationStep preparationStep) {
 		long id = preparationStep.getId();
-		Log.i(CookbookDataSource.class.getName(),
+		Log.i(PreparationStepDataSource.class.getName(),
 				"PreparationStep deleted with id: " + id);
 		database.delete(PreparationStepTable.TABLE_PreparationStep,
 				PreparationStepTable.COLUMN_PreparationStep_ID + " = " + id,
 				null);
 	}
 
-	public List<PreparationStep> getAllPreparationSteps() {
+	public List<PreparationStep> getAllPreparationSteps(Recipe recipe) {
 		Log.i(PreparationStepDataSource.class.getName(),
 				"getAllPreparationSteps() start");
 		List<PreparationStep> preparationSteps = new ArrayList<PreparationStep>();
-
+		Log.i(PreparationStepDataSource.class.getName(),
+				"getAllPreparationSteps() end1");
 		Cursor cursor = database.query(
-				PreparationStepTable.TABLE_PreparationStep, allColumns, null,
-				null, null, null,
+				PreparationStepTable.TABLE_PreparationStep, allColumns,
+				PreparationStepTable.COLUMN_PreparationStep_RECIPE_ID + " = "
+						+ recipe.getId(), null, null, null,
 				PreparationStepTable.COLUMN_PreparationStep_NAME);
 		cursor.moveToFirst();
+		Log.i(PreparationStepDataSource.class.getName(),
+				"getAllPreparationSteps() end2");
 		while (!cursor.isAfterLast()) {
 			PreparationStep preparationStep = cursorToPreparationStep(cursor);
 			preparationSteps.add(preparationStep);
 			cursor.moveToNext();
 		}
 		Log.i(PreparationStepDataSource.class.getName(),
-				"getAllPreparationSteps() end");
+				"getAllPreparationSteps() end3");
 		cursor.close();
+		
 		return preparationSteps;
 	}
 

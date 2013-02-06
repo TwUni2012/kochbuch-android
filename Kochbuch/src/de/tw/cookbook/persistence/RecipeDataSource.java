@@ -64,8 +64,7 @@ public class RecipeDataSource {
 		List<Recipe> recipes = new ArrayList<Recipe>();
 
 		Cursor cursor = database.query(
-				RecipeTable.TABLE_RECIPE,
-				allColumns,
+				RecipeTable.TABLE_RECIPE, allColumns,
 				RecipeTable.COLUMN_RECIPE_COOKBOOK_ID + " = "
 						+ cookbook.getId(), null, null, null,
 				RecipeTable.COLUMN_RECIPE_NAME);

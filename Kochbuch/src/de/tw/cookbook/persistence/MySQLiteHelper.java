@@ -2,6 +2,7 @@ package de.tw.cookbook.persistence;
 
 import de.tw.cookbook.entity.Recipe;
 import de.tw.cookbook.persistence.tables.CookbookTable;
+import de.tw.cookbook.persistence.tables.PreparationStepTable;
 import de.tw.cookbook.persistence.tables.RecipeTable;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,6 +21,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CookbookTable.COOKBOOK_CREATE);
 		db.execSQL(RecipeTable.RECIPE_CREATE);
+		db.execSQL(PreparationStepTable.PreparationStep_CREATE);
 	}
 
 	@Override
@@ -28,6 +30,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 				+ newVersion + ", which will destroy all old data");
 		db.execSQL(CookbookTable.COOKBOOK_DROP);
 		db.execSQL(RecipeTable.RECIPE_DROP);
+		db.execSQL(PreparationStepTable.PreparationStep_DROP);
 		onCreate(db);
 	}
 }
