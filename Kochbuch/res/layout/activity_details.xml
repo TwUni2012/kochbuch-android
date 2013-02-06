@@ -39,11 +39,19 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_description_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        style="@style/DescriptionText"/>
+
+    <TextView
         style="@style/SubHeadline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/preparationsteps" />
 
-	<include layout="@layout/input_line"/>    <include layout="@layout/list" />
+    <include layout="@layout/input_line" />
+
+    <include layout="@layout/list" />
 
 </LinearLayout>

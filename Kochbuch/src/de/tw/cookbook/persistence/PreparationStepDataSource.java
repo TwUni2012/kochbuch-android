@@ -33,12 +33,14 @@ public class PreparationStepDataSource {
 		dbHelper.close();
 	}
 
-	public PreparationStep createPreparationStep(String preparationStepName) {
+	public PreparationStep createPreparationStep(String preparationStepName, Recipe recipe) {
 		Log.i(PreparationStepDataSource.class.getName(),
 				"createPreparationStep: " + preparationStepName);
+		long recipeId = recipe.getId();
 		ContentValues values = new ContentValues();
 		values.put(PreparationStepTable.COLUMN_PreparationStep_NAME,
 				preparationStepName);
+		values.put(PreparationStepTable.COLUMN_PreparationStep_RECIPE_ID, recipeId);
 		long insertId = database.insert(
 				PreparationStepTable.TABLE_PreparationStep, null, values);
 		Cursor cursor = database.query(
@@ -64,23 +66,19 @@ public class PreparationStepDataSource {
 		Log.i(PreparationStepDataSource.class.getName(),
 				"getAllPreparationSteps() start");
 		List<PreparationStep> preparationSteps = new ArrayList<PreparationStep>();
-		Log.i(PreparationStepDataSource.class.getName(),
-				"getAllPreparationSteps() end1");
 		Cursor cursor = database.query(
 				PreparationStepTable.TABLE_PreparationStep, allColumns,
 				PreparationStepTable.COLUMN_PreparationStep_RECIPE_ID + " = "
 						+ recipe.getId(), null, null, null,
-				PreparationStepTable.COLUMN_PreparationStep_NAME);
+				PreparationStepTable.COLUMN_PreparationStep_ID);
+		// TODO sortierung der PreparationSteps?!
+		
 		cursor.moveToFirst();
-		Log.i(PreparationStepDataSource.class.getName(),
-				"getAllPreparationSteps() end2");
 		while (!cursor.isAfterLast()) {
 			PreparationStep preparationStep = cursorToPreparationStep(cursor);
 			preparationSteps.add(preparationStep);
 			cursor.moveToNext();
 		}
-		Log.i(PreparationStepDataSource.class.getName(),
-				"getAllPreparationSteps() end3");
 		cursor.close();
 		
 		return preparationSteps;

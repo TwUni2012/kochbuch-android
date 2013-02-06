@@ -28,4 +28,9 @@
         <item name="android:textSize">20sp</item>
         <item name="android:padding">5sp</item>
 	</style>
+		<style name="DescriptionText">
+        <item name="android:textSize">15sp</item>
+        <item name="android:paddingLeft">5sp</item>
+        <item name="android:paddingRight">5sp</item>
+	</style>
 </resources>
