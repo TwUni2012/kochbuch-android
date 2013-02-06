@@ -16,31 +16,32 @@ public class CookbookDataSource {
 
 	private SQLiteDatabase database;
 	private MySQLiteHelper dbHelper;
-	private String[] allColumns = {CookbookTable.COLUMN_COOKBOOK_ID,
+	private String[] allColumns = { CookbookTable.COLUMN_COOKBOOK_ID,
 			CookbookTable.COLUMN_COOKBOOK_NAME };
-	
 
 	public CookbookDataSource(Context context) {
 		dbHelper = new MySQLiteHelper(context);
 	}
-	
+
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 	}
-	
+
 	public void close() {
 		dbHelper.close();
 	}
 
 	public Cookbook createCookbook(String cookbookName) {
-		Log.i(CookbookDataSource.class.getName(), "createCookbook: " + cookbookName);
+		Log.i(CookbookDataSource.class.getName(), "createCookbook: "
+				+ cookbookName);
 		ContentValues values = new ContentValues();
 		values.put(CookbookTable.COLUMN_COOKBOOK_NAME, cookbookName);
-		long insertId = database.insert(CookbookTable.TABLE_COOKBOOK, null, values);
-		Log.i(CookbookDataSource.class.getName(), "works bis hier2");
-		Cursor cursor = database.query(CookbookTable.TABLE_COOKBOOK, 
-				allColumns, CookbookTable.COLUMN_COOKBOOK_ID + " = " + insertId, 
-				null, null, null, null);
+		long insertId = database.insert(CookbookTable.TABLE_COOKBOOK, null,
+				values);
+		Cursor cursor = database.query(CookbookTable.TABLE_COOKBOOK,
+				allColumns,
+				CookbookTable.COLUMN_COOKBOOK_ID + " = " + insertId, null,
+				null, null, null);
 		cursor.moveToFirst();
 		Cookbook newCookbook = cursorToCookbook(cursor);
 		cursor.close();
@@ -49,19 +50,21 @@ public class CookbookDataSource {
 
 	public void deleteCookbook(Cookbook cookbook) {
 		long id = cookbook.getId();
-		Log.i(CookbookDataSource.class.getName(), "Cookbook deleted with id: " + id);
-		database.delete(CookbookTable.TABLE_COOKBOOK, CookbookTable.COLUMN_COOKBOOK_ID
-				+ " = " + id, null);
+		Log.i(CookbookDataSource.class.getName(), "Cookbook deleted with id: "
+				+ id);
+		database.delete(CookbookTable.TABLE_COOKBOOK,
+				CookbookTable.COLUMN_COOKBOOK_ID + " = " + id, null);
 	}
-	
+
 	public List<Cookbook> getAllCookbooks() {
 		Log.i(CookbookDataSource.class.getName(), "getAllCookbooks() start");
 		List<Cookbook> cookbooks = new ArrayList<Cookbook>();
-		
-		Cursor cursor = database.query(CookbookTable.TABLE_COOKBOOK, 
-				allColumns, null, null, null, null, CookbookTable.COLUMN_COOKBOOK_NAME);
+
+		Cursor cursor = database.query(CookbookTable.TABLE_COOKBOOK,
+				allColumns, null, null, null, null,
+				CookbookTable.COLUMN_COOKBOOK_NAME);
 		cursor.moveToFirst();
-		while(!cursor.isAfterLast()) {
+		while (!cursor.isAfterLast()) {
 			Cookbook cookbook = cursorToCookbook(cursor);
 			cookbooks.add(cookbook);
 			cursor.moveToNext();
@@ -70,12 +73,12 @@ public class CookbookDataSource {
 		cursor.close();
 		return cookbooks;
 	}
-	
+
 	private Cookbook cursorToCookbook(Cursor cursor) {
 		Cookbook cookbook = new Cookbook();
 		cookbook.setId(cursor.getLong(0));
 		cookbook.setName(cursor.getString(1));
 		return cookbook;
 	}
-		
+
 }
